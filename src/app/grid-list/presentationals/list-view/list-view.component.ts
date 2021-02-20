@@ -28,6 +28,7 @@ export class ListViewComponent implements OnChanges {
     'Email',
     'Age',
     'PhoneNumber',
+    'action'
   ];
   gridForm: FormGroup;
 
@@ -38,7 +39,9 @@ export class ListViewComponent implements OnChanges {
   constructor(private fb: FormBuilder) {
     this.gridForm = this.fb.group({
       list: new FormArray([]),
-      changesValue: ['I dont know My age', Validators.compose([Validators.required])]
+      changesValue: ['I dont know My age', Validators.compose([Validators.required])],
+      quantity: [0, Validators.compose([Validators.required, , Validators.min(2), Validators.max(10)])],
+
     })
 
   }
@@ -48,6 +51,15 @@ export class ListViewComponent implements OnChanges {
     if (this.gridForm) {
       this.gridForm.setControl('list', this.gridDataSource);
     }
+
+    this.gridForm.controls['quantity'].valueChanges.subscribe(qua => {
+      const control = <FormArray>this.gridForm.controls['list'];
+
+      let a: Employee ={id: null, firstName: null, email: null, age: null, lastName: null, phoneNumber: null};
+      control.push(buildFormGroup(a));
+      this.gridForm.setControl('list', control);
+      this.gridForm.controls['list']
+    })
     this.gridForm.controls['list'].valueChanges.subscribe((e: any[]) => {
       console.log(e)
 
@@ -76,6 +88,17 @@ export class ListViewComponent implements OnChanges {
     const control = <FormArray>this.gridForm.controls['list'];
     control.push(buildFormGroup(a));
     this.gridForm.setControl('list', control);
+
+
+    
+  }
+
+  
+  barangRemove(barang: number) {
+    const control = <FormArray>this.gridForm.controls['list'];
+    control.removeAt(barang)
+    this.gridForm.setControl('list', control);
+    console.log('run')
 
   }
 
