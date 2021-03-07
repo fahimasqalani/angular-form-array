@@ -29,7 +29,7 @@ export const employeeList: Employee[] = [
   {
     id: `1589736400472`,
     firstName: `Marcel`,
-    lastName: `Gardner`,
+    lastName: `Gunner`,
     age: 26,
     phoneNumber: `9513697412`,
     email: `marcel.gardner@xxx.com`,
@@ -37,7 +37,7 @@ export const employeeList: Employee[] = [
   {
     id: `1589736406979`,
     firstName: `Louise `,
-    lastName: `Smith`,
+    lastName: `Bohner`,
     age: 27,
     phoneNumber: `0974362010`,
     email: `Louise.smith@xxx.com`,
